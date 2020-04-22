@@ -1,4 +1,6 @@
 const time = document.getElementById("time")
+const greeting = document.getElementById("greeting")
+const name = document.getElementById("name")
 
 function showTime () {
     let t = new Date(),
@@ -21,19 +23,34 @@ function addZero (n) {
 function setBackground () {
     let date = new Date(),
     hour = date.getHours()
-    console.log(hour)
 
     switch(hour){
         case hour < 12:
-            console.log('morning')
+            greeting.textContent = "Good morning,"
             break
         case hour < 18:
-            console.log('evening')
+            greeting.textContent = "Good afternoon,"
             break
         default:
-            console.log('night')
+            greeting.textContent = "Good evening,"
     }
 }
 
+function getName () {
+    if (localStorage.getItem('name') === null) {
+        name.textContent = '[Your name]'
+    } else {
+        name.textContent = localStorage.getItem('name')
+    }
+}
+
+function setName (e) {
+    console.log('setting name',e)
+}
+
+name.addEventListener('keypress', setName)
+
+
 showTime()
+getName()
 setBackground()
